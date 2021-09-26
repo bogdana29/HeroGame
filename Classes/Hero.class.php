@@ -13,9 +13,7 @@ class Hero extends PlayerAbstract implements RapidStrikeSkillInterface,MagicStri
     const LUCK = ['MIN' => 10,'MAX' => 30];
     
     /**
-     * This is the constructor for the Hero class. It will be called
-     * when creating an Hero object ($hero = new Hero();) or 
-     * on of its subtypes (Hero or Beast). 
+     * This is the constructor for the Hero class 
      */
     function __construct() {
 	     

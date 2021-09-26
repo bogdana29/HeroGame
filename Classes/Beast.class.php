@@ -13,9 +13,7 @@ class Beast extends PlayerAbstract{
     const LUCK = ['MIN' => 25,'MAX' => 40];
 
     /**
-     * This is the constructor for the Beast class. It will be called
-     * when creating an Beast object ($Beast = new Beast();) or 
-     * on of its subtypes (Hero or Beast). 
+     * This is the constructor for the Beast class. 
      */
     function __construct() {
 	    

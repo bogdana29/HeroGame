@@ -5,7 +5,7 @@ class Game{
     const MAX_TURE_JOC = 20;
     const RAPID_STRIKE_CHANCE = 10;
     const MAGIC_SHIELD_CHANCE = 20;
-    /** @var Hero */
+    
     protected $hero ;
     protected $beast; 
     protected $turnNumber;
@@ -15,10 +15,10 @@ class Game{
     protected static $instances = [];
     
     public function __construct() { 
-        $this->log("Game init");
+        $this->log('Game init');
     }
  
-    private function setTurnNumber($turn) { 
+    private function setTurnNumber(int $turn) { 
         $this->turnNumber = $turn;
     }
     private function getTurnNumber() :int { 
@@ -26,7 +26,7 @@ class Game{
     }
     
     public function startGame(){
-        $this->log( "Game started");
+        $this->log( 'Game started');
         $this->initGame();
         $turn = 1;
         $this->setTurnNumber($turn);
@@ -51,7 +51,7 @@ class Game{
         $this->winner = ($this->hero->getHealth() > $this->beast->getHealth()) ? $this->hero : $this->beast; 
 
         $this->log( '<b>Winner is: ' . $this->winner->getPlayerName() . ' </b>');
-        $this->log( '<b> Rounds played : ' . $this->getTurnNumber(). '</b>');
+        $this->log( '<b>Rounds played : ' . $this->getTurnNumber(). '</b>');
         if($this->winner instanceof Hero) { 
             $this->log( 'Health of defender : ' . $this->beast->getHealth());
         }else if($this->winner instanceof Beast) { 
@@ -59,7 +59,6 @@ class Game{
         }else{
             $this->log( 'Defender unimplemented');
         }
-
     }
     /**
      * 
@@ -81,7 +80,7 @@ class Game{
                 $this->attacker = $this->hero;
                 break;
             default :
-                $this->log("Attacker unimplemented ".get_class($this->attacker));
+                $this->log('Attacker unimplemented '.get_class($this->attacker));
                 break;
         }       
          
@@ -113,11 +112,11 @@ class Game{
                 $randomRapidStrike = round(mt_rand(1, (1 / $chanceRapidStrike) * 100)); // round it to make an integer
                 if($randomRapidStrike == 1){
                     $this->log( '<font color = "blue" >Skill used : <b>Rapid Strike</b></font>');
-                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . '</font>');
                     
                     $this->damage = $this->hero->rapidStrike($this->damage);
                     
-                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . '</font>');
                 }
                       
                 break;
@@ -130,11 +129,11 @@ class Game{
                 $randomMagicShield = round(mt_rand(1, (1 / $chanceMagicShield) * 100)); // round it to make an integer
                 if($randomMagicShield == 1){
                     $this->log( '<font color = "blue" >Skill used : <b>Magic Shield</b></font>');
-                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . '</font>');
                     
                     $this->damage = $this->hero->magicShields($this->damage);
 
-                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . '</font>');
                     
                 }                
                 break;
@@ -142,7 +141,7 @@ class Game{
         
     }     
     /**
-    * functia verifica daca jucatorii au luck
+    * functia verifica daca jucatorii au noroc
     *  
     *  An attacker can miss their hit and do no damage if the defender gets lucky that turn.
     * 
@@ -152,61 +151,53 @@ class Game{
             case 'Hero' : 
                 $luck = $this->beast->getLuck(); // chance in percentage
                 $random = round(mt_rand(1, (1 / $luck) * 100)); // round it to make an integer
-                if($random == 1) { // luck% chance to reinint hero skills
+                if($random == 1) { // luck% chance 0 damage
                     $this->log( '<font color = "green" >Luck for Beast</font>');
-                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . '</font>');
                     $this->damage = 0;
-                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . '</font>');
                     return true;
                 }
                 break;
             case 'Beast':   
                 $luck = $this->hero->getLuck(); // chance in percentage
                 $random = round(mt_rand(1, (1 / $luck) * 100)); // round it to make an integer
-                if($random == 1) { // luck% chance to reinint hero skills
+                if($random == 1) { // luck% chance to 0 damage
                     $this->log( '<font color = "green" >Luck for Hero</font>');
-                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage before ' .  $this->damage . '</font>');
                     $this->damage = 0;
-                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . "</font>");
+                    $this->log( '<font color = "red" >Damage after ' .  $this->damage . '</font>');
                     return true;
                 }
-                break;
-                
+                break;               
         }        
         return false;
     }
     /**
-     * functia verifica daca jucatorii au Health > 0 a.i. sa continue lupta
-     * 
-     */
+    * functia verifica daca jucatorii au Health > 0 a.i. sa continue lupta
+    */
     private function playersAreAlive(){
         if($this->hero->getHealth() > 0 && $this->beast->getHealth() > 0) return true;
         return false;
     }
     /**
-     * 
-     * se instantiaza hero , beast si se porneste batalia
-     */
+    * se instantiaza hero , beast si se porneste batalia
+    */
     private function initGame(){
-        //echo "<br> init";
-         $this->initHero();
-         $this->initBeast();
-         $this->initAttack();
+        $this->initHero();
+        $this->initBeast();
+        $this->initAttack();
     }
-
     /**
      * instantiere Hero
      */
-    private function initHero(){
-         
-        $this->hero = new Hero();      
-        
+    private function initHero(){         
+        $this->hero = new Hero();              
     }
     /**
      * instantiere Beast
      */
-    private function initBeast(){
-         
+    private function initBeast(){         
         $this->beast =  new Beast();
     }
     
@@ -228,7 +219,7 @@ class Game{
                 /**daca si Luck sunt egale retrimit la initGame pentru a genera iar random valorile  */
             $this->initGame();
         }
-        $this->log( "Battle :  ".$this->hero->getPlayerName()." contra ". $this->beast->getPlayerName());
+        $this->log( 'Battle :  '.$this->hero->getPlayerName().' contra '. $this->beast->getPlayerName());
          
     }
     /**
@@ -236,24 +227,20 @@ class Game{
      * functia afiseaza proprietatile celor 2 participanti dupa un atac
      */
     private function getInfoGame($info){
-        $this->log( " <b> Round ".$this->getTurnNumber() ."</b>");
+        $this->log( '<b>Round '.$this->getTurnNumber() .'</b>');
         if(trim($info) != '') $this->log( $info );
-        $this->log( " Attacker : <b>".get_class($this->attacker) ."</b>");
-        $this->log( " Damage per attack : <b>". $this->getDamage() ."</b>");
-        $this->log( ' Hero properties: H:' .$this->hero->getHealth().
+        $this->log( 'Attacker : <b>'.get_class($this->attacker) .'</b>');
+        $this->log( 'Damage per attack : <b>'. $this->getDamage() .'</b>');
+        $this->log( 'Hero properties: H:' .$this->hero->getHealth().
                     '; S:' .$this->hero->getStrength().
                     '; D:' .$this->hero->getDefence().
                     '; Sp:'.$this->hero->getSpeed().
                     '; L:' .$this->hero->getLuck());
 
-        $this->log( " Beast properties : H ". $this->beast->getHealth().
+        $this->log( 'Beast properties : H '. $this->beast->getHealth().
                     '; S:' .$this->beast->getStrength().
                     '; D:' .$this->beast->getDefence().
                     '; Sp:' .$this->beast->getSpeed().
                     '; L:' .$this->beast->getLuck())   ;
-
-    }
-
-        
-     
+    }    
 }
