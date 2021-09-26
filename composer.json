@@ -1,0 +1,21 @@
+{
+    "name": "bogdana29/hero-game",
+    "version": "1.1",
+    "description": "Hero game",
+    "type": "composer",
+    "autoload": {
+        "psr-4": {
+            "HeroGame\\Classes\\": "Classes"            
+        }
+    },   
+    "authors": [
+        {
+            "name": "Bogdana Vicol",
+            "email": "bogdana29@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "9"
+    }
+}
