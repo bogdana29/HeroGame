@@ -1,5 +1,8 @@
 <?php
-
+namespace HeroGame\Entity;  
+use HeroGame\Entity\Player\Hero  ;
+use HeroGame\Entity\Player\Beast  ; 
+use HeroGame\Entity\Logs\Logger as Logger  ; 
 class Game{
     use Logger;
     const MAX_TURE_JOC = 20;
@@ -69,12 +72,12 @@ class Game{
         $this->setDamage();
         
         switch (get_class($this->attacker)){
-            case 'Hero' : 
+            case 'HeroGame\Entity\Player\Hero' : 
                 $health = $this->beast->getHealth() - $this->getDamage();
                 $this->beast->setHealth($health);
                 $this->attacker = $this->beast;
                 break;
-            case 'Beast':
+            case 'HeroGame\Entity\Player\Beast':
                 $health = $this->hero->getHealth() - $this->getDamage();
                 $this->hero->setHealth($health);
                 $this->attacker = $this->hero;
@@ -104,7 +107,7 @@ class Game{
         if($this->defenderIsLucky()) return;
             
         switch (get_class($this->attacker)){
-            case 'Hero' : 
+            case 'HeroGame\Entity\Player\Hero' : 
                 //calcul damage 
                 $this->damage = $this->hero->getStrength()-$this->beast->getDefence()  ;
                 // daca ataca hero , atunci verific chance-ul hero-ului sa aiba Rapid strike 
@@ -120,7 +123,7 @@ class Game{
                 }
                       
                 break;
-            case 'Beast':    
+            case 'HeroGame\Entity\Player\Beast':    
                 //calcul damage
                 $this->damage =  $this->beast->getStrength()-$this->hero->getDefence();
 
@@ -148,7 +151,7 @@ class Game{
     */
     private function defenderIsLucky(){
         switch (get_class($this->attacker)){
-            case 'Hero' : 
+            case 'HeroGame\Entity\Player\Hero' : 
                 $luck = $this->beast->getLuck(); // chance in percentage
                 $random = round(mt_rand(1, (1 / $luck) * 100)); // round it to make an integer
                 if($random == 1) { // luck% chance 0 damage
@@ -159,7 +162,7 @@ class Game{
                     return true;
                 }
                 break;
-            case 'Beast':   
+            case 'HeroGame\Entity\Player\Beast':   
                 $luck = $this->hero->getLuck(); // chance in percentage
                 $random = round(mt_rand(1, (1 / $luck) * 100)); // round it to make an integer
                 if($random == 1) { // luck% chance to 0 damage
@@ -176,7 +179,7 @@ class Game{
     /**
     * functia verifica daca jucatorii au Health > 0 a.i. sa continue lupta
     */
-    private function playersAreAlive(){
+    public function playersAreAlive(){
         if($this->hero->getHealth() > 0 && $this->beast->getHealth() > 0) return true;
         return false;
     }
@@ -192,13 +195,14 @@ class Game{
      * instantiere Hero
      */
     private function initHero(){         
-        $this->hero = new Hero();              
+        $this->hero = new \HeroGame\Entity\Player\Hero();              
+       // $this->hero = new  \Hero();              
     }
     /**
      * instantiere Beast
      */
     private function initBeast(){         
-        $this->beast =  new Beast();
+        $this->beast =  new \HeroGame\Entity\Player\Beast();
     }
     
     /**

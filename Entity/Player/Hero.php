@@ -1,10 +1,13 @@
 <?php
+namespace HeroGame\Entity\Player;
+
+use \HeroGame\Player\PlayerAbstract,HeroGame\Entity\Skills\RapidStrikeSkillInterface,\HeroGame\Entity\Skills\MagicStrikeSkillInterface;
 /**
  * Description of Hero
  *
  * @author Bogdana Vicol
  */
-class Hero extends PlayerAbstract implements RapidStrikeSkillInterface,MagicStrikeSkillInterface{
+class Hero extends \HeroGame\Entity\Player\PlayerAbstract implements \HeroGame\Entity\Skills\RapidStrikeSkillInterface,\HeroGame\Entity\Skills\MagicStrikeSkillInterface{
     const NAME = 'Orderus';
     const HEALTH = ['MIN' => 70,'MAX' => 100];
     const STRENGTH = ['MIN' => 70,'MAX' => 80];

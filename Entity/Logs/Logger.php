@@ -1,5 +1,5 @@
 <?php
-
+namespace HeroGame\Entity\Logs;
 trait Logger
 {
 	public function log($msg)

@@ -1,4 +1,6 @@
 <?php
+namespace HeroGame\Entity\Skills;
+
 /**
  * Class RapidStrikeSkillInterface
  *  

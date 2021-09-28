@@ -1,5 +1,5 @@
 <?php
-namespace Tests;
+namespace HeroGame\Entity\Tests;
  
 /**
  * Test Game
@@ -8,7 +8,7 @@ namespace Tests;
  */
 
 use PHPUnit\Framework\TestCase;
- 
+use HeroGame\Entity\Game;
 /**
  * Class GameTest
  *  
@@ -16,12 +16,18 @@ use PHPUnit\Framework\TestCase;
 
 class GameTest extends TestCase
 {     
-    /**
-     * testez daca sunt 
-     */
-    public function testPlayersAliveTrue()
+    /** @var $game 
+    */
+    protected   $game;
+    protected function setUp():void
+    { 
+        $this->game = $this ->createMock('HeroGame\Entity\Game') ;
+        $this->game->setTurnNumber(20);
+    }
+
+    public function testJocTemrinat()
     {    
-        $this->expectOutputString('Revin cu testele dupa ziua de miercuri, daca mai e nevoie . (Am un deadline si ceva nu imi iese cand fac un Mock pe interfete )' );
-        
+       // $this->expectOutputString(' ' );
+        $this->assertEquals(20, $this->game->getTurnNumber());
     }
 }

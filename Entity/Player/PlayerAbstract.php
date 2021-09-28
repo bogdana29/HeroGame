@@ -1,4 +1,6 @@
 <?php 
+namespace HeroGame\Entity\Player;
+
 /**
  * Class PlayerAbstract
  *  

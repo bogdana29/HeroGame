@@ -1,4 +1,5 @@
 <?php
+namespace HeroGame\Entity\Player;
 /**
  * Description of Beast
  *

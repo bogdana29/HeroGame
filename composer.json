@@ -5,7 +5,7 @@
     "type": "composer",
     "autoload": {
         "psr-4": {
-            "HeroGame\\Classes\\": "Classes"            
+            "HeroGame\\Entity\\": "Entity"            
         }
     },   
     "authors": [
@@ -17,5 +17,13 @@
     "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": "9"
+    },
+    "require": {
+        "php": ">=7.0.27"
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Tests\\": "Tests/"
+        }
     }
 }
