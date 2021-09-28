@@ -1,2 +1,2 @@
 # HeroGame 
-![Screenshot](img/HeroGame3.png)
+![Screenshot](./img/HeroGame3.png)
